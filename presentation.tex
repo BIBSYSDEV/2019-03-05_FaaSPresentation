@@ -1,5 +1,6 @@
 \documentclass{beamer}
 \usepackage[utf8]{inputenc}
+\usepackage{graphicx}
 
 %Information to be included in the title page:
 \title{FaaS}
@@ -58,16 +59,19 @@ Challenges:
 \frametitle{Challenges of FaaS II}
 How to deal with them:
 \begin{itemize}
-  \item Be aware that the code should be portable, but don't strive for project-defeating generics
-  \item Understand the offerings, learn about infrastructure as code
-  \item Be aware that most things can be solved with Lambdas, the question is whether they should be
+  \item Portable code 
+  \begin{itemize}
+	\item   but don't strive for project-defeating generics
+  \end{itemize}  
+  \item Understand the offerings, learn about Infrastructure As Code (IAC)
+  \item Many things can be solved with Lambdas. (But should they?) 
   \item Keep an eye on what costs are accumulating by setting up cost reports, automate resource deprovisioning
   \item Discipline is important: 
   \begin{itemize}
     \item TDD \& BDD/FDD are essential
-    \item Code hygene and QA equally so
+    \item Code hygiene and QA equally so
     \item having continuous deployment as a constant and understood aim
-    \item Infrastructure as code is an absolute
+    \item IAC is an absolute
   \end{itemize}
 \end{itemize}
 \end{frame}
@@ -95,14 +99,45 @@ Basically, know your needs; know the platform; use the appropriate technology.
 \end{frame}
 
 \begin{frame}
+\frametitle{Concrete example: REST API (A Serverless Server)}
+\begin{itemize}
+\item A Jersey server as a function.
+\item Advantages
+\begin{itemize}
+\item The server starts with very small delay (milliseconds)
+\item Server dies after few minutes without requests
+\item Cost for low/moderate traffic: low
+\item Scales automatically
+\item No maintenance
+\item The Jersey server can be ported into an EC2 instance with very few code modifications
+\item Extremely easy to replicate the production environment
+\end{itemize}
+\item Disadvantages
+\begin{itemize}
+\item Cost for high traffic: unknown 
+\item Can have problems with timeouts for very heavy queries. 
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
 \frametitle{Concrete example: REST API}
+\begin{figure}
+\includegraphics[scale=0.3]{rest.jpeg}
+\end{figure}
+
 \end{frame}
 
 \begin{frame}
 \frametitle{Concrete example: CD-platform}
+\begin{figure}
+\includegraphics[scale=0.3]{cd.jpeg}
+\end{figure}
 \end{frame}
 
 \begin{frame}
+
 \frametitle{Summary}
 \begin{itemize}
   \item Infrastructure as code is alpha \& omega
